@@ -12,6 +12,13 @@ all: rastertozj
 rastertozj: $(OBJS)
 	gcc $(LDFLAGS) -o rastertozj rastertozj.o $(LDLIBS)
 
+install: all
+	mkdir -p ${DESTDIR}/usr/lib/cups/filter
+	cp -f rastertozj ${DESTDIR}/usr/lib/cups/filter
+	chmod 755 ${DESTDIR}/usr/lib/cups/filter
+	mkdir -p ${DESTDIR}/usr/share/cups/model/zjiang
+	cp cp ZJ-58.ppd ${DESTDIR}/usr/share/cups/model/zjiang/
+
 rastertozj.o: rastertozj.c
 	gcc $(CFLAGS) -c rastertozj.c
 
